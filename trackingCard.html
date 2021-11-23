@@ -449,6 +449,43 @@
         left: 16px;
         cursor: poRoboto;
       }
+
+      /* toast */
+      #toast {
+        /* position: fixed; */
+        position: absolute;
+        display: none;
+        align-items: center;
+        padding-left: 16px;
+        z-index: 10000;
+        bottom: 100px;
+
+        height: 48px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #ffffff;
+        font-family: Inter;
+        left: 5%;
+        width: 85%;
+        max-width: 420px;
+        background: #15141b;
+        box-shadow: 0px 12px 17px rgba(0, 0, 0, 0.06),
+          0px 5px 22px rgba(0, 0, 0, 0.04), 0px 7px 8px rgba(0, 0, 0, 0.08);
+        border-radius: 4px;
+      }
+
+      #toast.show {
+        display: flex;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+
+      #toast.showLonger {
+        display: flex;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 5.5s;
+        animation: fadein 0.5s, fadeout 0.5s 5.5s;
+      }
+
     </style>
   </head>
 
@@ -505,6 +542,7 @@
             <button id="cta" onclick="redirect()">Activate now</button>
           </div> -->
         </div>
+        <div id="toast">Some message</div>
       </div>
     </div>
   </body>
@@ -516,6 +554,8 @@
     let footer = document.getElementById("footer");
     let Htmldata = "";
     let redirectUrl = "";
+    let cardBlock = false
+    let cardBlockText =null
     
 
     function andriod() {
@@ -566,6 +606,8 @@
         
           loader.style.display = "none";
           redirectUrl = data && data.buttonUrl;
+          cardBlock = data && data.cardBlock;
+          cardBlockText= data && data.cardBlockText;
 
           // if error occurs
           if (data.error || data.reasonCode === "ERROR") {
@@ -683,13 +725,16 @@
   }
 
     function redirect() {
-       if(redirectUrl==='' || redirectUrl===null ){
+      if(cardBlock){
+        showToaster(cardBlockText)
+      }
+       else if(redirectUrl==='' || redirectUrl===null ){
         sendDataToApp()
        }
        else{
         window.open(redirectUrl, "_self");
-       }
-      
+       
+       } 
     }
 
     function reload() {
@@ -708,10 +753,23 @@
       console.error("Error sending data to IOS")
     }
     try {
-      Android.sendEvent(JSON.stringify(ctObj));
+      Android.sendData(JSON.stringify(ctObj));
     } catch {
       console.error("Error sending data to Android");
     }
   }
+
+  function showToaster(message, time, showLonger) {
+      var x = document.getElementById("toast");
+      let timer = time || 3000;
+      let show = showLonger || "show";
+      x.innerHTML = message;
+      x.className = show;
+      setTimeout(function () {
+        x.className = x.className.replace(show, "");
+        x.innerHTML = "";
+      }, timer);
+    }
+
   </script>
 </html>

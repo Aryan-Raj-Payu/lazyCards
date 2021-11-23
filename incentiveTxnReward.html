@@ -748,7 +748,7 @@
       console.error("Error sending data to IOS")
     }
     try {
-      Android.sendEvent(JSON.stringify(ctObj));
+      Android.sendData(JSON.stringify(ctObj));
     } catch {
       console.error("Error sending data to Android");
     }
