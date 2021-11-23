@@ -458,7 +458,7 @@
   </style>
 </head>
 
-<body onload="andriod();ios()">
+<body onload="andriod();ios();sendEventToApp()">
   <div class="reward-container">
     <!-- loader -->
     <div class="loader full-page" id="loader">
@@ -737,6 +737,20 @@
       Android.sendData(JSON.stringify(responseObject));
     } catch {
       console.log("andriod error");
+    }
+  }
+
+  function sendEventToApp(event_name, details) {
+    const ctObj = { event: 'lazycard_section_load', details:{page:'interstitial_first_txn_benefits'} };
+    try {
+      webkit.messageHandlers.sendEvent.postMessage(ctObj);
+    } catch {
+      console.error("Error sending data to IOS")
+    }
+    try {
+      Android.sendEvent(JSON.stringify(ctObj));
+    } catch {
+      console.error("Error sending data to Android");
     }
   }
 </script>

@@ -452,7 +452,7 @@
     </style>
   </head>
 
-  <body onload="andriod();ios()">
+  <body onload="andriod();ios();sendEventToApp()">
     <div class="card-tracking-container">
       <!-- loader -->
       <div class="loader full-page" id="loader">
@@ -699,5 +699,19 @@
     function dis(val) {
       return val;
     }
+
+    function sendEventToApp(event_name, details) {
+    const ctObj = { event: 'lazycard_section_load', details:{page:'card_delivery_tracking'} };
+    try {
+      webkit.messageHandlers.sendEvent.postMessage(ctObj);
+    } catch {
+      console.error("Error sending data to IOS")
+    }
+    try {
+      Android.sendEvent(JSON.stringify(ctObj));
+    } catch {
+      console.error("Error sending data to Android");
+    }
+  }
   </script>
 </html>
