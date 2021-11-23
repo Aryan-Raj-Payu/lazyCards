@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tracking Page</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .card-tracking-container {
+        font-family: Inter;
+        font-style: normal;
+        background: #e9e9e9;
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100vh;
+        /* letter-spacing: 0.25px; */
+      }
+
+      .card-tracking-container .tracking-details-container {
+        width: 100%;
+        background: white;
+        max-width: 420px;
+        /* height: 100vh; */
+        position: relative;
+      }
+
+      .header {
+        position: relative;
+        box-sizing: border-box;
+        padding: 0px 16px 0px 16px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        
+      }
+
+      .header .header-text {
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 32px;
+        color: #15141b;
+        letter-spacing: 0.25px;
+        
+      }
+
+      /* .header .header-back-arrow {
+            position: absolute;
+            top: -60px;
+        } */
+
+      .tracking-details {
+        padding: 16px 16px 16px 16px;
+        max-height: 55%;
+        overflow: scroll;
+        z-index: -100;
+        /* border:solid 1px; */
+        max-height: 65vh;
+      }
+
+      .order-box {
+        position: relative;
+      }
+
+      .order-header {
+        display: flex;
+      }
+
+      .number-container {
+        width: 21px;
+        height: 21px;
+        background: #C5C4D0;
+        text-align: center;
+        border-radius: 50px;
+        font-size: 12px;
+        color: white;
+        border: solid 1px transparent;
+      }
+
+      .number {
+        margin-top: 3px;
+      }
+
+      .order-header-text {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        color: #15141b;
+        margin-left: 15px;
+        margin-top: -10px;
+        position: relative;
+        letter-spacing: 0.25px;
+      }
+
+      .order-box {
+        /* margin-top:35px; */
+      }
+
+      .order-box .box-track-line {
+        position: absolute;
+        width: 2px;
+        height: 32px;
+        background: #10b981;
+        left: 11px;
+        top: -33px;
+      }
+      .order-box .box-track-line2 {
+        position: absolute;
+        width: 2px;
+        height: 52px;
+        background: #10b981;
+        left: 11px;
+        top: -48px;
+      }
+
+      .order-box:first-child .box-track-line {
+        display: none;
+      }
+
+       .order-box .box-track-line-white {
+        position: absolute;
+        width: 2px;
+        height: 32px;
+        background: #C5C4D0;
+        left: 11px;
+        top: -33px;
+      } 
+
+      .order-box .box-track-line-white2 {
+        position: absolute;
+        width: 2px;
+        height: 52px;
+        background: #C5C4D0;
+        left: 11px;
+        top: -48px;
+      } 
+      
+
+
+      .order-box:first-child .box-track-line-white {
+        display: none;
+      }
+
+      .date {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        color: #a7a6b4;
+      }
+
+      .order-list {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+        color: #15141b;
+        position: relative;
+        margin: 29px 0px 30px 35px;
+      }
+
+      /* .order-list::after{
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 38px;
+        background: #10b981;
+        left: -24px;
+        top: -35px;
+
+      } */
+
+      @media only screen and (max-width: 350px) {
+        .order-list {
+        font-size: 10px;
+      }
+      
+        }
+      .track-line {
+        position: absolute;
+        width: 2px;
+        height: 38px;
+        background: #10b981;
+        left: -24px;
+        top: -35px;
+      }
+
+      .track-line2 {
+        position: absolute;
+        width: 2px;
+        height: 52px;
+        background: #10b981;
+        left: -24px;
+        top: -48px;
+      }
+      
+     
+
+      .track-dot {
+        position: absolute;
+        width: 6.67px;
+        height: 6.67px;
+        background: #10b981;
+        border-radius: 25px;
+        left: -26px;
+        top: 5px;
+      }
+
+      .track-line-white {
+        position: absolute;
+        width: 2px;
+        height: 38px;
+        background: #a7a6b4;
+        left: -24px;
+        top: -35px;
+      }
+      .track-line-white2 {
+        position: absolute;
+        width: 2px;
+        height: 52px;
+        background: #a7a6b4;
+        left: -24px;
+        top: -48px;
+      }
+      .track-dot-white {
+        position: absolute;
+        width: 6.67px;
+        height: 6.67px;
+        background: #a7a6b4;
+        border-radius: 25px;
+        left: -26px;
+        top: 5px;
+      }
+
+      /* footer */
+
+      .footer {
+        text-align: center;
+        margin-bottom: 16px;
+        width: 100%;
+        z-index: 100;
+        /* position: absolute; */
+         position: fixed;
+        bottom: 0px;
+        max-width: 420px;
+        background: white;
+      }
+
+      .footer .divider {
+        width: 100%;
+        border: solid 1px rgba(0, 0, 0, 0.12);
+      }
+
+      .footer button {
+        width: 95%;
+        height: 48px;
+        background: #db2855;
+        border-radius: 12px;
+        border: transparent;
+        color: white;
+        cursor: pointer;
+
+        font-family: Inter;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+        color: #ffffff;
+      }
+
+      .disabled {
+        cursor: not-allowed !important;
+        background: grey !important;
+      }
+
+      .footer .text {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        color: #6e6d7b;
+        margin: 14px 0px;
+      }
+      .mb-28 {
+        margin-bottom: 28px;
+      }
+
+      /* loader ui */
+
+      .loader {
+        position: absolute;
+        background: #fff;
+        width: 100%;
+        height: 100%;
+        z-index: 999999;
+        top: 0;
+        left: 0;
+      }
+
+      .loader.full-page {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+      }
+
+      .lds-ring-container {
+        position: relative;
+        text-align: center;
+        transform: translateY(-50%);
+        top: 50%;
+        width: 100%;
+      }
+
+      .lds-ring {
+        display: inline-block;
+        position: relative;
+        width: 64px;
+        height: 64px;
+        margin: 0 auto;
+      }
+
+      .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 51px;
+        height: 51px;
+        margin: 6px;
+        border: 6px solid #ed3561;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #ed3561 transparent transparent transparent;
+      }
+
+      .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+      }
+
+      .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+      }
+
+      .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+      }
+
+      @keyframes lds-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* error screen */
+
+      .error {
+        position: relative;
+        width: 100%;
+        max-width: 420px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: white;
+        margin: auto;
+        position: relative;
+      }
+      .error .error-header {
+        margin-top: 30px;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: center;
+        color: #141414;
+      }
+      .error .error-sub-header {
+        margin-top: 10px;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        color: #999999;
+      }
+      .error .fixed-button {
+        z-index: 100;
+        position: fixed;
+        bottom: 0px;
+        height: 90px;
+        background: transparent;
+        width: 100%;
+        max-width: 420px;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: end;
+        align-items: flex-end;
+        padding-bottom: 16px;
+        -ms-flex-pack: center;
+        justify-content: center;
+      }
+      .error .fixed-button .theme-btn {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        background: #ee3362;
+        border-radius: 16px;
+        width: 320px;
+        height: 56px;
+        -ms-flex-pack: center;
+        justify-content: center;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+        border: transparent;
+      }
+      .error .back-img {
+        position: absolute;
+        top: 30px;
+        left: 16px;
+        cursor: poRoboto;
+      }
+    </style>
+  </head>
+
+  <body onload="andriod();ios()">
+    <div class="card-tracking-container">
+      <!-- loader -->
+      <div class="loader full-page" id="loader">
+        <div class="lds-ring-container">
+          <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <!-- loader end -->
+      <div class="tracking-details-container" id="tracking">
+        <div class="header">
+          <div class="header-text">Tracking details</div>
+        </div>
+        <!-- commenting reference how ui is working -->
+        <!-- contains all tracking order -->
+        <div class="tracking-details" id="app">
+          <!-- <div class="order-box">
+                    <div class="order-header mb-28">
+                        <div>
+                            <img
+                                src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/card-phase2/track-tick.svg" />
+                        </div>
+                        <div class="number-container">
+                            <div class="number">1</div>
+                        </div>
+                        <div class="order-header-text">Ordered
+                            <div class="date">Fri, 18th June’21</div>
+                        </div>
+                    </div>
+                    <div class="order-list">Your order was placed on 18th June’21
+                        <div class="track-line"></div>
+                        <div class="track-dot"></div>
+                    </div>
+                    <div class="order-list">Your order was placed on 18th June’21
+                        <div class="track-line"></div>
+                        <div class="track-dot"></div>
+                    </div>
+                
+                    <div class="box-track-line"></div>
+                </div> -->
+        </div>
+        <div class="footer" id="footer">
+          <!-- <div class="divider"></div>
+          <div class="text">Received it already?</div>
+          <div class="button">
+            <button id="cta" onclick="redirect()">Activate now</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let url = "https://api.lazypay.in/api/lazycard/getDeliveryTrackDetails";
+    let app = document.getElementById("app");
+    let loader = document.getElementById("loader");
+    let tracking = document.getElementById("tracking");
+    let footer = document.getElementById("footer");
+    let Htmldata = "";
+    let redirectUrl = "";
+    
+
+    function andriod() {
+      try {
+        Android.requestData(
+          JSON.stringify({ requestKey: "deviceType", callBack: "deviceName" })
+        );
+        Android.requestData(
+          JSON.stringify({ requestKey: "authorization", callBack: "authKey" })
+        );
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
+
+    function ios() {
+      try {
+        webkit.messageHandlers.requestData.postMessage({
+          requestKey: "authorization",
+          callBack: "authKey",
+        });
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
+    function deviceName(name) {
+      console.log("device  name", name);
+    }
+
+    function authKey(key) {
+      apiCall(key);
+    }
+    // apiCall('5bf8fa4b-656a-44ac-91b8-eb598b26fe9d');
+    function apiCall(authKeyValue) {
+      fetch(url, {
+        method: "GET",
+        credentials: "omit",
+        headers: {
+          'authorization': authKeyValue
+          // authorization: "5bf8fa4b-656a-44ac-91b8-eb598b26fe9d",
+          // authorization: "96e4c6cb-03d8-470c-95fc-3cee04a80e0e",
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+        
+          loader.style.display = "none";
+          redirectUrl = data && data.buttonUrl;
+
+          // if error occurs
+          if (data.error || data.reasonCode === "ERROR") {
+            let HtmlError = `<div class="error">
+            <div class="image">
+                <img src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/cc-ref/something-wrong.svg" />
+            </div>
+            <div class="error-header">Something went wrong!</div>
+            <div class="error-sub-header">
+                This shouldn't have happened. Our best minds are working on it. Please
+                try again after sometime.
+            </div>
+            <div class="fixed-button">
+                <button class="theme-btn" onClick='reload()'>
+                    Try Again
+                </button>
+            </div>
+          </div>`;
+            tracking.innerHTML = HtmlError;
+            return;
+          }
+
+          //if response
+          let doubleLineBox = false
+          data.steps.forEach((element, index) => {
+            // debugger
+            Htmldata += `<div class="order-box">
+                    <div class="order-header mb-28">
+                        ${
+                          element.status 
+                            ? `<div style="margin-left:1px;"> <img width="21" height="21" src = "https://s3.ap-south-1.amazonaws.com/images.lazypay.in/card-phase2/track-tick.svg" /></div > `
+                            : `<div class="number-container">  <div class="number">${
+                                index + 1
+                              }</div> </div> `
+                        }
+                        <div class="order-header-text">${element.title}
+                            <div class="date">${element.subtitle}</div>
+                        </div>
+                    </div>
+                    ${list(element.list, element.status)}
+                    ${
+                      element.status 
+                        ? `<div class=${doubleLineBox?"box-track-line2":'box-track-line'}></div>`
+                        : `<div class=${doubleLineBox?"box-track-line-white2":'box-track-line-white'}></div>`
+                    }
+                </div>`;
+                if(doubleLineBox){
+                  doubleLineBox = false
+                }
+               
+             if(element.list && element.list.length>0){
+              let length =  element.list.length-1
+              if(element.list[length].text.length>=47){
+                doubleLineBox = true  
+              }
+             }
+            
+               
+          });
+        if(data && data.button){
+          footerData = `<div class="divider"></div>
+          <div class="text">${data.bottomTitle?data.bottomTitle:""}</div>
+          <div class="button">
+            <button id="cta" onclick="redirect()" >${data.buttonText}</button>
+          </div>`;
+          footer.innerHTML = footerData;
+        }
+          app.innerHTML = Htmldata;
+        })
+        .catch((error) => {
+          loader.style.display = "none";
+        });
+    }
+
+    function list(data, status) {
+      let value = "";
+      let doubleLine =false
+      // let data = [{text: "Your order was placed on wednesday, 24 september"},{text: "Your order was placed on Tuesday, 24 August"},{text: "Your order was placed on Tuesday, 24 August"},{text: "Your order was placed on Tuesday, 24 August"},{text: "Your order was placed on Tuesday, 24 August"}]
+      
+      if (data) {
+        data.forEach((element,index) => {
+          value += `${
+            status
+              ? `<div class="order-list" > ${element.text}<div class=${doubleLine?"track-line2":'track-line'}></div><div class="track-dot"></div></div>`
+              : `<div class="order-list" > ${element.text}<div class=${doubleLine?"track-line-white2":'track-line-white'}></div><div class="track-dot-white"></div></div>`
+          }`;
+          if(doubleLine){
+            doubleLine = false
+          }
+          console.log(element.text,element.text.length)
+          if(element.text.length>=47){
+            doubleLine = true
+          }
+          
+        }
+        );
+      }
+      return value;
+    }
+
+    function sendDataToApp() {
+    var responseObject = {};
+    responseObject["cta"] = {
+        ctaUrl: "",
+        ctaText: "NEED_HELP"
+    };
+    console.log("response", responseObject)
+    try {
+      webkit.messageHandlers.sendData.postMessage(JSON.stringify(responseObject));
+    } catch {
+      console.log("ios error");
+    }
+    try {
+      Android.sendData(JSON.stringify(responseObject));
+    } catch {
+      console.log("andriod error");
+    }
+  }
+
+    function redirect() {
+       if(redirectUrl==='' || redirectUrl===null ){
+        sendDataToApp()
+       }
+       else{
+        window.open(redirectUrl, "_self");
+       }
+      
+    }
+
+    function reload() {
+      window.location.reload();
+    }
+
+    function dis(val) {
+      return val;
+    }
+  </script>
+</html>

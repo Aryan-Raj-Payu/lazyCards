@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Reward Page</title>
+  <!-- <link rel="stylesheet" href="stylesheet.css" /> -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .reward-container {
+      font-family: Roboto;
+      font-style: normal;
+      display: flex;
+      background: #e9e9e9;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: center;
+      letter-spacing: 0.25px;
+    }
+
+    .reward-component-container {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      height: 100vh;
+      position: relative;
+    }
+
+    .header {
+      display: flex;
+      border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+      /* padding: 16px; */
+    }
+
+    .cross {
+      margin-top: 4px;
+      cursor: pointer;
+    }
+
+    .header-text {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: #181721;
+      margin-left: 16px;
+    }
+
+    .reward-details {
+      padding: 16px;
+    }
+
+    .banner {
+      margin-top: 20px;
+    }
+
+    .banner .upper-text {
+      background: -webkit-linear-gradient(#e12353, #7710ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 500;
+    }
+
+    .banner .middle-text {
+      margin-top: 5px;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 32px;
+      color: #181721;
+    }
+
+    .banner .lower-text {
+      margin-top: 4px;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 16px;
+      color: #585766;
+    }
+
+    .steps-container {
+      margin-top: 30px;
+      position: relative;
+    }
+
+    .step {
+      display: flex;
+    }
+
+    .step-left {
+      margin-left: 15px;
+      margin-top: -6px;
+    }
+
+    .step-text-1 {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 16px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #585766;
+    }
+
+    .step-text-2 {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.25px;
+      color: #181721;
+      height: 38px;
+    }
+
+    .step-second {
+      margin-top: 30px;
+    }
+
+    .line {
+      height: 52px;
+      width: 0px;
+      border: dotted 1px #00b26e;
+      position: absolute;
+      left: 10px;
+      top: 27px;
+      border-width: 0 0 0 1px;
+    }
+
+    .details {
+      margin-top: 27px;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      font-feature-settings: "ordn"on;
+      color: #181721;
+    }
+
+    .details ul {
+      margin-top: 5px;
+      margin-left: -19px;
+    }
+
+    .details ul li {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 16px;
+      color: #585766;
+    }
+
+    .terms-and-conditions {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      font-feature-settings: "ordn"on;
+      color: #181721;
+    }
+
+    .terms-and-conditions p {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      color: #585766;
+    }
+
+    .expire {
+      margin-top: 18px;
+      display: flex;
+    }
+
+    .expire-text {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 16px;
+      color: #585766;
+      margin-left: 8px;
+    }
+
+    .btn {
+      /* position: relative;
+  height:100%;
+  border:solid 1px; */
+    }
+
+    .button-container {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      display: flex;
+      margin-top: 40%;
+      justify-content: center;
+    }
+
+    button {
+      border: transparent;
+      width: 93%;
+      /* max-width: 320px; */
+      height: 48px;
+      background: #e12353;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+    }
+
+    /*  */
+
+    .loader {
+      position: absolute;
+      background: #fff;
+      width: 100%;
+      height: 100%;
+      z-index: 999999;
+      top: 0;
+      left: 0;
+    }
+
+    .loader.full-page {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+    }
+
+    .lds-ring-container {
+      position: relative;
+      text-align: center;
+      transform: translateY(-50%);
+      top: 50%;
+      width: 100%;
+    }
+
+    .lds-ring {
+      display: inline-block;
+      position: relative;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto;
+    }
+
+    .lds-ring div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 51px;
+      height: 51px;
+      margin: 6px;
+      border: 6px solid #ed3561;
+      border-radius: 50%;
+      animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: #ed3561 transparent transparent transparent;
+    }
+
+    .lds-ring div:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+
+    .lds-ring div:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+
+    .lds-ring div:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+
+    @keyframes lds-ring {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* error  ui */
+
+    .error {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: white;
+      margin: auto;
+      position: relative;
+    }
+
+    .error .error-header {
+      margin-top: 30px;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 24px;
+      text-align: center;
+      color: #141414;
+    }
+
+    .error .error-sub-header {
+      margin-top: 10px;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      color: #999999;
+    }
+
+    .error .fixed-button {
+      z-index: 100;
+      position: fixed;
+      bottom: 0px;
+      height: 90px;
+      background: transparent;
+      width: 100%;
+      max-width: 420px;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: end;
+      align-items: flex-end;
+      padding-bottom: 16px;
+      -ms-flex-pack: center;
+      justify-content: center;
+    }
+
+    .error .fixed-button .theme-btn {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      background: #ee3362;
+      border-radius: 16px;
+      width: 320px;
+      height: 56px;
+      -ms-flex-pack: center;
+      justify-content: center;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      text-align: center;
+      color: #ffffff;
+      border: transparent;
+    }
+
+    .error .back-img {
+      position: absolute;
+      top: 30px;
+      left: 16px;
+      cursor: poRoboto;
+    }
+  </style>
+</head>
+
+<body onload="andriod();ios()">
+  <div class="reward-container">
+    <!-- loader -->
+    <div class="loader full-page" id="loader">
+      <div class="lds-ring-container">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <!-- loader end -->
+    <div class="reward-component-container" id="container">
+      <!-- commenting for ui  how it is working-->
+      <!-- <div class="header">
+                <div class="cross">
+                    <img src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/reward/reward-cross.svg" />
+                </div>
+                <div class="header-text">
+                    Reward details
+                </div>
+            </div>
+          
+            <div class="reward-details">
+                <div class="banner">
+                    <div class="upper-text">Use LazyCard & Win</div>
+                    <div class="middle-text">Win upto ₹500 assured cashback</div>
+                    <div class="lower-text">Complete 2 steps below to unlock this</div>
+                </div>
+              
+                <div class="expire">
+                    <div><img src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/reward/ic_clock.svg">
+                    </div>
+                    <div class="expire-text">Expires on 12,May, 2021</div>
+                </div>
+              
+                <div class="steps-container">
+                    <div class="step">
+                        <div style="margin-left: -2px;"><img
+                                src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/reward/step-1.svg" />
+                        </div>
+                        <div class="step-left">
+                            <div class="step-text-1">STEP 1</div>
+                            <div class="step-text-2">Spend Rs 3000 or more on your LazyCard in the
+                                current cycle</div>
+                        </div>
+                    </div>
+                    <div class="step step-second">
+                        <div><img src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/reward/step-2.svg" />
+                        </div>
+                        <div class="step-left">
+                            <div class="step-text-1">STEP 2</div>
+                            <div class="step-text-2">Repay your due amount by 17th June, 2021</div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+               
+                <div class="details">
+                    Details
+                    <ul>
+                        <li>Scratch the code on the back of the pack.</li>
+                        <li>Go to https://offers.lazypay.com/</li>
+                        <li>Enter the unique promo code in the offer box</li>
+                    </ul>
+                </div>
+            </div> 
+           <div class="btn">
+                <div class="button-container">
+                    <button onClick="sendDataToApp()">${data.button.text}</button>
+                </div>
+                </div>
+          -->
+    </div>
+  </div>
+</body>
+
+<script>
+  let url =
+    "https://sboxapi.lazypay.in/api/reward/milestoneDetailsForJackpot";
+  let container = document.getElementById("container");
+  let loader = document.getElementById("loader");
+  let htmlData = "";
+  let ctaUrl = "";
+  let ctaText = '';
+  function andriod() {
+    try {
+      Android.requestData(
+        JSON.stringify({ requestKey: "deviceType", callBack: "deviceName" })
+      );
+      Android.requestData(
+        JSON.stringify({ requestKey: "authorization", callBack: "authKey" })
+      );
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
+  function ios() {
+    try {
+      webkit.messageHandlers.requestData.postMessage({
+        requestKey: "authorization",
+        callBack: "authKey",
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+  function deviceName(name) {
+    console.log("device  name", name);
+  }
+
+  function authKey(key) {
+    apiCall(key);
+  }
+  // apiCall("e3a9de76-5c2f-42e9-88bd-14a415db9485")
+  function apiCall(authKeyValue) {
+    fetch(url, {
+      method: "GET",
+      credentials: "omit",
+      headers: {
+        authorization: authKeyValue
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        loader.style.display = "none";
+
+        // if error occurs
+        if (data.error || data.reasonCode === "ERROR") {
+          let HtmlError = `<div class="error">
+            <div class="image">
+                <img src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/cc-ref/something-wrong.svg" />
+            </div>
+            <div class="error-header">Something went wrong!</div>
+            <div class="error-sub-header">
+                This shouldn't have happened. Our best minds are working on it. Please
+                try again after sometime.
+            </div>
+            <div class="fixed-button">
+                <button class="theme-btn" onClick='reload()'>
+                    Try Again
+                </button>
+            </div>
+        </div>`;
+          container.innerHTML = HtmlError;
+          return;
+        }
+        // if response 
+        ctaUrl = data.button && data.button.ctaURL;
+        ctaText = data.button && data.button.ctaText;
+        htmlData = `
+      <div class="header">
+        <!--
+                <div class="cross">
+                    <img src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/reward/reward-cross.svg" />
+                </div>
+                <div class="header-text">
+                   ${data.pageHeader}
+                </div>  -->
+            </div>
+            <!-- reward details  -->
+            <div class="reward-details">
+                <div class="banner">
+                    <div class="upper-text">${data.title}</div>
+                    <div class="middle-text">${data.milestoneTitle}</div>
+                    <div class="lower-text">${data.milestoneSubtitle}</div>
+                </div>
+                <!-- expire div 
+                <div class="expire">
+                    <div><img src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/reward/ic_clock.svg">
+                    </div>
+                    <div class="expire-text">Expires on 12,May, 2021</div>
+                </div> -->
+                <!-- steps container start-->
+                <div class="steps-container">
+                    <div class="step">
+                                ${data.milestoneSteps[0] && data.milestoneSteps[0].status === "COMPLETED"
+            ? '<div style="margin-left: -2px;margin-top:7px;"> <img  src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/reward/completed.svg" />  </div>'
+            : '<div style="margin-top:7px;"><img src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/reward/inprogress.svg" /> </div>'
+          }
+                        <div class="step-left">
+                            <div class="step-text-1">${data.milestoneSteps[0] && data.milestoneSteps[0].stepTitle
+          }</div>
+                            <div class="step-text-2">${data.milestoneSteps[0] && data.milestoneSteps[0].task
+          }</div>
+                        </div>
+                    </div>
+                    <div class="step step-second">
+                        <div>
+                            ${data.milestoneSteps[1] && data.milestoneSteps[1].status === "IN_PROGRESS"
+            ? '<img  src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/reward/inprogress.svg" />'
+            : '<img style="margin-left:-2px;"src="https://s3.ap-south-1.amazonaws.com/images.lazypay.in/reward/not-initiated.svg" />'
+          }
+                        </div>
+                        <div class="step-left">
+                            <div class="step-text-1">${data.milestoneSteps[1] && data.milestoneSteps[1].stepTitle
+          }</div>
+                            <div class="step-text-2">${data.milestoneSteps[1] && data.milestoneSteps[1].task
+          }</div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+                <!-- details start -->
+                <div class="details">
+                    ${data.details.title}
+                    <ul>
+                        ${list(data.details.content)}
+                    </ul>
+                </div>
+                <!-- terms and condition start -->
+            </div>
+            <div class="btn">
+                <div class="button-container">
+                    <button onClick="sendDataToApp()">${data.button.text}</button>
+                </div>
+                </div>
+            `;
+        container.innerHTML = htmlData;
+      });
+
+  }
+  function list(list) {
+    let value = "";
+    list.forEach((element) => {
+      value += `<li>${element}</li>`;
+    });
+    return value;
+  }
+
+  function redirect() {
+    window.open(redirectUrl, "_self");
+  }
+
+  function reload() {
+    window.location.reload();
+  }
+
+  function sendDataToApp() {
+    var responseObject = { cta: {} };
+    responseObject.cta = { ctaURL: ctaUrl, ctaText };
+    try {
+      webkit.messageHandlers.sendData.postMessage(JSON.stringify(responseObject));
+    } catch (e) {
+      console.log("ios error", e);
+    }
+    try {
+      Android.sendData(JSON.stringify(responseObject));
+    } catch {
+      console.log("andriod error");
+    }
+
+  }
+</script>
+
+</html>
