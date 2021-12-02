@@ -449,10 +449,47 @@
         left: 16px;
         cursor: poRoboto;
       }
+
+      /* toast */
+      #toast {
+        /* position: fixed; */
+        position: absolute;
+        display: none;
+        align-items: center;
+        padding-left: 16px;
+        z-index: 10000;
+        bottom: 100px;
+
+        height: 48px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #ffffff;
+        font-family: Inter;
+        left: 5%;
+        width: 85%;
+        max-width: 420px;
+        background: #15141b;
+        box-shadow: 0px 12px 17px rgba(0, 0, 0, 0.06),
+          0px 5px 22px rgba(0, 0, 0, 0.04), 0px 7px 8px rgba(0, 0, 0, 0.08);
+        border-radius: 4px;
+      }
+
+      #toast.show {
+        display: flex;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+
+      #toast.showLonger {
+        display: flex;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 5.5s;
+        animation: fadein 0.5s, fadeout 0.5s 5.5s;
+      }
+
     </style>
   </head>
 
-  <body onload="andriod();ios()">
+  <body onload="andriod();ios();sendEventToApp()">
     <div class="card-tracking-container">
       <!-- loader -->
       <div class="loader full-page" id="loader">
@@ -505,6 +542,7 @@
             <button id="cta" onclick="redirect()">Activate now</button>
           </div> -->
         </div>
+        <div id="toast">Some message</div>
       </div>
     </div>
   </body>
@@ -516,6 +554,8 @@
     let footer = document.getElementById("footer");
     let Htmldata = "";
     let redirectUrl = "";
+    let cardBlock = false
+    let cardBlockText =null
     
 
     function andriod() {
@@ -548,14 +588,14 @@
     function authKey(key) {
       apiCall(key);
     }
-    // apiCall('5bf8fa4b-656a-44ac-91b8-eb598b26fe9d');
+    // apiCall('cb708a78-a020-4930-bbba-876e1ac769aa');
     function apiCall(authKeyValue) {
       fetch(url, {
         method: "GET",
         credentials: "omit",
         headers: {
           'authorization': authKeyValue
-          // authorization: "5bf8fa4b-656a-44ac-91b8-eb598b26fe9d",
+           // authorization: "5bf8fa4b-656a-44ac-91b8-eb598b26fe9d",
           // authorization: "96e4c6cb-03d8-470c-95fc-3cee04a80e0e",
         },
       })
@@ -566,6 +606,8 @@
         
           loader.style.display = "none";
           redirectUrl = data && data.buttonUrl;
+          cardBlock = data && data.cardBlock;
+          cardBlockText= data && data.cardBlockText;
 
           // if error occurs
           if (data.error || data.reasonCode === "ERROR") {
@@ -591,7 +633,6 @@
           //if response
           let doubleLineBox = false
           data.steps.forEach((element, index) => {
-            // debugger
             Htmldata += `<div class="order-box">
                     <div class="order-header mb-28">
                         ${
@@ -619,10 +660,10 @@
              if(element.list && element.list.length>0){
               let length =  element.list.length-1
               if(element.list[length].text.length>=47){
-                doubleLineBox = true  
+                doubleLineBox = true
+                
               }
              }
-            
                
           });
         if(data && data.button){
@@ -644,7 +685,6 @@
       let value = "";
       let doubleLine =false
       // let data = [{text: "Your order was placed on wednesday, 24 september"},{text: "Your order was placed on Tuesday, 24 August"},{text: "Your order was placed on Tuesday, 24 August"},{text: "Your order was placed on Tuesday, 24 August"},{text: "Your order was placed on Tuesday, 24 August"}]
-      
       if (data) {
         data.forEach((element,index) => {
           value += `${
@@ -655,7 +695,6 @@
           if(doubleLine){
             doubleLine = false
           }
-          console.log(element.text,element.text.length)
           if(element.text.length>=47){
             doubleLine = true
           }
@@ -686,13 +725,16 @@
   }
 
     function redirect() {
-       if(redirectUrl==='' || redirectUrl===null ){
+      if(cardBlock){
+        showToaster(cardBlockText)
+      }
+       else if(redirectUrl==='' || redirectUrl===null ){
         sendDataToApp()
        }
        else{
         window.open(redirectUrl, "_self");
-       }
-      
+       
+       } 
     }
 
     function reload() {
@@ -702,5 +744,32 @@
     function dis(val) {
       return val;
     }
+
+    function sendEventToApp(event_name, details) {
+    const ctObj = { event: 'lazycard_section_load', details:{page:'card_delivery_tracking'} };
+    try {
+      webkit.messageHandlers.sendEvent.postMessage(ctObj);
+    } catch {
+      console.error("Error sending data to IOS")
+    }
+    try {
+      Android.sendData(JSON.stringify(ctObj));
+    } catch {
+      console.error("Error sending data to Android");
+    }
+  }
+
+  function showToaster(message, time, showLonger) {
+      var x = document.getElementById("toast");
+      let timer = time || 3000;
+      let show = showLonger || "show";
+      x.innerHTML = message;
+      x.className = show;
+      setTimeout(function () {
+        x.className = x.className.replace(show, "");
+        x.innerHTML = "";
+      }, timer);
+    }
+
   </script>
 </html>
